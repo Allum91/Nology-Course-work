@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-color: beige;
+}
+
+.header {
+    font-family: arial;
+    text-align: center;
+    text-decoration: underline;
+    color: navy;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+nav > ul {
+    list-style-type: none;
+    border: 2px solid blue;
+    height: 35px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;   
+}
+
+nav > ul > li > a {
+    color: navy;
+    font-family: arial;
+    text-decoration: none;
+}
+
+nav > ul > li> a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+footer {
+    font-family: arial;
+    text-align: center;
+    color: navy;
+    margin-top: 20px;
+
+}

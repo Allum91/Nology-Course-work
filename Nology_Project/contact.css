@@ -1,0 +1,32 @@
+main {
+    
+    display: flex;
+    justify-content: center;
+    font-family: arial;
+}
+
+main > .contactForm {
+    padding: 10px;
+    border: 2px blue solid;
+    background-color: white;;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    margin-top: 15px;
+
+}
+
+footer {
+    
+    margin-top: 50px;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.form-title-section {
+    text-align: center;
+    margin-bottom: 35px;
+}

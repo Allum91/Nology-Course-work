@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="stylesheet.css">
+        <link rel="stylesheet" href="contact.css">
+        <title>Contact - Le Petit Café</title>
+    </head>
+    <body>
+       <div class="header">
+            <h1> Contact us at Le Petit Café</h1>
+            <br>
+            <p> The REAL Parisian Café</p>
+       </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="Home.html"> Home</a>
+                    </li>
+                    <li>
+                        <a href="About.html"> About Us</a>
+                    </li>
+                    <li>
+                        <a href="Contact_Us.html"> Contact Us</a>
+                    </li>
+                </ul>
+            </nav>
+
+        <main>
+            <form class="contactForm" onsubmit="return submitMessage(event);">
+            <!-- Email -->
+            <label for="email"> Email:</label>
+            <input type="email" name="email" id="email" required>
+            <!-- Conatact Name -->
+            <label for="fullName"> Full Name:</label>
+            <input type="text" name="fullName" id="fullName" required>
+            <!-- Reason for message -->
+            <label for="feedbackType"> Reason:</label>
+            <select name="feedbackType" id="feedbackType">
+                <option value="Review">Review</option>
+                <option value="Complaint">Comeplaint</option>
+                <option value="makeABooking">Make a booking</option>
+            </select>
+            <!-- Message -->
+            <label for="message">Your Comment:</label>
+            <textarea for="message" id="message" rows="3" cols="20" required></textarea>
+            <!-- Clear button -->
+            <button>Clear</button>
+            <!-- Submit button -->
+            <input type="submit" value="Send Request">
+        </form>
+
+        </main>    
+
+        <footer> 
+            <div class="form-title-section">
+                <h3>Contact Message</h3>
+                <button onclick="deleteMessages();">Clear Messages</button>
+            </div>
+            <div class="form-wrapper">
+                <dl id="currentMessages">
+
+                </dl>
+            </div>
+             Copyright @ Le Petit Café 2021
+        
+        </footer>
+
+        <script>
+            function deleteMessages() {
+                if (window.sessionStorage.getItem("messages")) {
+                    window.sessionStorage.removeItem("messages");
+                }
+
+                renderMessages();
+            }
+
+            function submitMessage(event) {
+                event.preventDefault();
+                const email = document.getElementById("email").value;
+                const fullName = document.getElementById("fullName").value;
+                const feedbackType = document.getElementById("feedbackType").value;
+                const message = document.getElementById("message").value;
+                
+
+                const messageObject = {
+                    email, fullName, feedbackType, message
+                };
+                
+                console.log(messageObject);
+
+                let currentMessages = [];
+
+                if (window.sessionStorage.getItem("messages")){
+                    currentMessages = JSON.parse(window.sessionStorage.getItem("messages"));
+                }
+
+                currentMessages.push(messageObject);
+                window.sessionStorage.setItem(
+                    "messages",
+                    JSON.stringify(currentMessages)
+                );
+                renderMessages();
+            }
+
+            function renderMessages() {
+                let currentMessages = [];
+                
+                if (window.sessionStorage.getItem("messages")){
+                    currentMessages = JSON.parse(window.sessionStorage.getItem("messages"));
+                }
+
+                let listItems = [];
+                for (let i = 0; i < currentMessages.length; i++) {
+                    let listItem = "";
+                    const currentMessage = currentMessages[i];
+                    listItem += `<dt>${currentMessage.fullName} - ${currentMessage.email}</dt>`;
+                    listItem += `<dd>${currentMessage.feedbackType}: ${currentMessage.message}</dd>`;
+                    listItem += `<br />`;
+                    listItems.push(listItem);
+                }
+
+                let descList = document.getElementById("currentMessages");
+                descList.innerHTML = listItems.join("");
+            }
+
+            renderMessage();
+            
+
+        </script>
+    </body>
+</html>
